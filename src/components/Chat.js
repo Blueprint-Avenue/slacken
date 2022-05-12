@@ -33,46 +33,48 @@ function Chat() {
 
 	return (
 		<ChatContainer>
-			<>
-				{/* Header */}
-				<Header>
-					{/* Header Left */}
-					<HeaderLeft>
-						<h4>
-							<strong>#{roomDetails?.data().name}</strong>
-						</h4>
-						<StarBorderOutlined />
-					</HeaderLeft>
-					{/* Header Right */}
-					<HeaderRight>
-						<p>
-							<InfoOutlined /> Details
-						</p>
-					</HeaderRight>
-				</Header>
-				<ChatMessages>
-					{/* List Out Messages */}
-					{roomMessages?.docs.map((doc) => {
-						const {message, timestamp, user, userImage} = doc.data();
+			{roomDetails && roomMessages && (
+				<>
+					{/* Header */}
+					<Header>
+						{/* Header Left */}
+						<HeaderLeft>
+							<h4>
+								<strong>#{roomDetails?.data().name}</strong>
+							</h4>
+							<StarBorderOutlined />
+						</HeaderLeft>
+						{/* Header Right */}
+						<HeaderRight>
+							<p>
+								<InfoOutlined /> Details
+							</p>
+						</HeaderRight>
+					</Header>
+					<ChatMessages>
+						{/* List Out Messages */}
+						{roomMessages?.docs.map((doc) => {
+							const {message, timestamp, user, userImage} = doc.data();
 
-						return (
-							<Message
-								key={doc.id}
-								message={message}
-								timestamp={timestamp}
-								user={user}
-								userImage={userImage}
-							/>
-						);
-					})}
-					<ChatBottom ref={chatRef} />
-				</ChatMessages>
-				<ChatInput
-					chatRef={chatRef}
-					channelName={roomDetails?.data().name}
-					channelId={roomId}
-				/>
-			</>
+							return (
+								<Message
+									key={doc.id}
+									message={message}
+									timestamp={timestamp}
+									user={user}
+									userImage={userImage}
+								/>
+							);
+						})}
+						<ChatBottom ref={chatRef} />
+					</ChatMessages>
+					<ChatInput
+						chatRef={chatRef}
+						channelName={roomDetails?.data().name}
+						channelId={roomId}
+					/>
+				</>
+			)}
 		</ChatContainer>
 	);
 }
