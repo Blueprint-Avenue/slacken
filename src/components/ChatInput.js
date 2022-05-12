@@ -4,7 +4,7 @@ import styled from "styled-components";
 import {db} from "../firebase";
 import firebase from "firebase";
 
-function ChatInput({channelId, channelName}) {
+function ChatInput({channelId, channelName, chatRef}) {
 	const [input, setInput] = useState("");
 
 	const sendMessage = (e) => {
@@ -21,6 +21,10 @@ function ChatInput({channelId, channelName}) {
 			userImage:
 				"https://www.pinclipart.com/picdir/big/389-3899824_new-minnesota-timberwolves-logos-png-download-minnesota-timberwolves.png",
 		});
+		chatRef?.current?.scrollIntoView({
+			behavior: "smooth",
+		});
+
 		setInput("");
 	};
 
